@@ -1,5 +1,7 @@
 import Head from "next/head";
 
+import { stories } from "../data";
+
 export const config = { amp: true };
 
 export default function Home() {
@@ -24,37 +26,46 @@ export default function Home() {
         poster-square-src="https://amp.dev/static/samples/img/story_dog2_square.jpg"
         poster-landscape-src="https://amp.dev/static/samples/img/story_dog2_landscape.jpg"
       >
-        {/* <!-- A story consists of one or more pages. Each page is declared by an `amp-story-page` element. Pages are designed by layering videos, images and text. Here we have a page that uses two layers. One layer filling the available space with an image and one text layer that shows a heading. --> */}
-        <amp-story-page id="page-1">
-          <amp-story-grid-layer template="fill">
-            <amp-img
-              src="https://mmc.tirto.id/image/otf/400x0/2021/04/08/mozaik-glenn-fredly_ratio-9x16.jpg"
-              width="720"
-              height="1280"
-              layout="responsive"
-              className="vignette-inset"
-            />
-          </amp-story-grid-layer>
-          <amp-story-grid-layer template="thirds">
-            <div grid-area="lower-third">
-              <h3 animate-in="fly-in-right">
-                <span data-text-background-color="#c3943c">8 April</span>
-              </h3>
-              <h2 animate-in="fly-in-left">
-                <span data-text-background-color="#c3943c">
-                  Mengenang Glenn Fredly:
-                </span>
-              </h2>
-              <h1 animate-in="fly-in-left">
-                <span data-text-background-color="crimson">
-                  Kebaikan Bernyanyi Melampaui Maut
-                </span>
-              </h1>
-            </div>
-          </amp-story-grid-layer>
-          <amp-story-page-attachment layout="nodisplay" href="/mengenang-glenn-fredly"  data-cta-text="Read more" theme="dark">
-          </amp-story-page-attachment>
-        </amp-story-page>
+        {stories.map((stories) => (
+          <amp-story-page id={stories.slug}>
+            <amp-story-grid-layer template="fill">
+              <amp-img
+                src={stories.cover}
+                width="720"
+                height="1280"
+                layout="responsive"
+                className="vignette-inset"
+              />
+            </amp-story-grid-layer>
+            <amp-story-grid-layer template="thirds">
+              <div grid-area="lower-third">
+                {stories.subtitle && (
+                  <h3 animate-in="fly-in-right">
+                    <span data-text-background-color="#c3943c">
+                      {stories.subtitle}
+                    </span>
+                  </h3>
+                )}
+                <h2 animate-in="fly-in-left">
+                  <span data-text-background-color="#c3943c">
+                    {stories.title_1}
+                  </span>
+                </h2>
+                <h1 animate-in="fly-in-left">
+                  <span data-text-background-color="crimson">
+                    {stories.title_2}
+                  </span>
+                </h1>
+              </div>
+            </amp-story-grid-layer>
+            <amp-story-page-attachment
+              layout="nodisplay"
+              href={`/${stories.slug}`}
+              data-cta-text="Read more"
+              theme="dark"
+            ></amp-story-page-attachment>
+          </amp-story-page>
+        ))}
 
         {/* <!-- Here we have a page consisting of a video which autoplays and loops. --> */}
         {/* <amp-story-page id="page-2">
