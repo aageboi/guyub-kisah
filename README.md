@@ -6,6 +6,6 @@ Tech stack:
 - typescript
 - AMP-Story
 
-<img src"demo.gif" alt="demo kisah" width="360" height="640" />
-
 [Demo](https://kisah.guyub.id/)
+
+![Demo Kisah](demo.gif?raw=true "Kisah")
